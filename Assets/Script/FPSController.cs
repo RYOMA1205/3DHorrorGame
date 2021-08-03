@@ -16,6 +16,16 @@ public class FPSController : MonoBehaviour
 
     float Xsensityvity = 3f, Ysensityvity = 3f;
 
+    // 変数の宣言
+    bool cursorLock = true;
+
+    // 変数の宣言(角度の制限用)
+    float minX = -90f, maxX = 90f;
+
+    // 角度制限回数の作成
+
+    // Updateの中で作成した関数を呼ぶ
+
     void Start()
     {
         cameraRot = cam.transform.localRotation;
@@ -30,8 +40,13 @@ public class FPSController : MonoBehaviour
         cameraRot *= Quaternion.Euler(-yRot, 0, 0);
         characterRot *= Quaternion.Euler(0, xRot, 0);
 
+        cameraRot = ClampRotation(cameraRot);
+
         cam.transform.localRotation = cameraRot;
         transform.localRotation = characterRot;
+
+        // 作成した関数をUPdateで呼び出す
+        UpdateCursorLock();
     }
 
     // 入力に合わせてプレイヤーの位置を変更していく
@@ -46,5 +61,45 @@ public class FPSController : MonoBehaviour
 
         //transform.position += new Vector3(x, 0, z);
         transform.position += cam.transform.forward * z + cam.transform.right * x;
+    }
+
+    // マウスカーソルの表示を切り替える関数を作成する
+    public void UpdateCursorLock()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            cursorLock = false;
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            cursorLock = true;
+        }
+
+        if (cursorLock)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else if(!cursorLock)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+    public Quaternion ClampRotation(Quaternion q)
+    {
+        // q = x, y, z, w (x, y, zはベクトル(量と向き) : wはスカラー(座標とは無関係の量))
+
+        q.x /= q.w;
+        q.y /= q.w;
+        q.z /= q.w;
+        q.w = 1f;
+
+        float angleX = Mathf.Atan(q.x) * Mathf.Rad2Deg * 2f;
+
+        angleX = Mathf.Clamp(angleX, minX, maxX);
+
+        q.x = Mathf.Tan(angleX * Mathf.Deg2Rad * 0.5f);
+
+        return q;
     }
 }
