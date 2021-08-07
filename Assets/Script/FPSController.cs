@@ -22,9 +22,7 @@ public class FPSController : MonoBehaviour
     // 変数の宣言(角度の制限用)
     float minX = -90f, maxX = 90f;
 
-    // 角度制限回数の作成
-
-    // Updateの中で作成した関数を呼ぶ
+    public Transform doorDirection;
 
     void Start()
     {
@@ -47,6 +45,8 @@ public class FPSController : MonoBehaviour
 
         // 作成した関数をUPdateで呼び出す
         UpdateCursorLock();
+
+        Opening();
     }
 
     // 入力に合わせてプレイヤーの位置を変更していく
@@ -101,5 +101,26 @@ public class FPSController : MonoBehaviour
         q.x = Mathf.Tan(angleX * Mathf.Deg2Rad * 0.5f);
 
         return q;
+    }
+
+    public void Opening()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            RaycastHit hitInfo;
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 worldDir = ray.direction;
+
+            Debug.DrawRay(doorDirection.transform.position, doorDirection.transform.forward, Color.yellow);
+
+            if (Physics.Raycast(doorDirection.transform.position, doorDirection.transform.forward, out hitInfo, 100))
+            {
+                if (hitInfo.collider.gameObject.TryGetComponent(out DoorController doorController))
+                {
+                    doorController.OpeningDoor();
+                }
+            }
+        }
     }
 }
