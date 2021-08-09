@@ -24,12 +24,18 @@ public class FPSController : MonoBehaviour
 
     public Transform doorDirection;
 
+    // 変数の宣言(アニメーション用)
+    public Animator animator;
+
     void Start()
     {
         cameraRot = cam.transform.localRotation;
         characterRot = transform.localRotation;
     }
+
     // アップデートでマウスの入力を受け取り、その動きをカメラに反映
+    // アップデートで各ボタンの入力を確認したらアニメーション遷移
+    // 歩き・走り
     void Update()
     {
         float xRot = Input.GetAxis("Mouse X") * Ysensityvity;
@@ -47,6 +53,32 @@ public class FPSController : MonoBehaviour
         UpdateCursorLock();
 
         Opening();
+
+        if (Mathf.Abs(x) > 0 || Mathf.Abs(z) > 0)
+        {
+            if (!animator.GetBool("Walk"))
+            {
+                animator.SetBool("Walk", true);
+            }
+        }
+        else if(animator.GetBool("Walk"))
+        {
+            animator.SetBool("Walk", false);
+        }
+
+        if (z > 0 && Input.GetKey(KeyCode.LeftShift))
+        {
+            if (!animator.GetBool("Run"))
+            {
+                animator.SetBool("Run", true);
+                speed = 0.4f;
+            }
+        }
+        else if (animator.GetBool("Run"))
+        {
+            animator.SetBool("Run", false);
+            speed = 0.1f;
+        }
     }
 
     // 入力に合わせてプレイヤーの位置を変更していく
