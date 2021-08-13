@@ -66,7 +66,7 @@ public class FPSController : MonoBehaviour
             animator.SetBool("Walk", false);
         }
 
-        if (z > 0 && Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             if (!animator.GetBool("Run"))
             {
