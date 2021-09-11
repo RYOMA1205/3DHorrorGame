@@ -27,6 +27,8 @@ public class FPSController : MonoBehaviour
     // 変数の宣言(アニメーション用)
     public Animator animator;
 
+    public ItemManager itemManager;
+
     void Start()
     {
         cameraRot = cam.transform.localRotation;
@@ -153,6 +155,18 @@ public class FPSController : MonoBehaviour
                     doorController.OpeningDoor();
                 }
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out ItemDetail itemDetail) == true)
+        {
+            // ItemDetailがゲームオブジェクトにアタッチされていた場合
+            // アイテムを獲得する処理を実行する
+            itemManager.UpdateHaveItems(itemDetail.GetItem());
+
+            Destroy(itemDetail.gameObject);
         }
     }
 }

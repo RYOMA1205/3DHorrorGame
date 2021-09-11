@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool[] haveItems;
 
-    // Update is called once per frame
-    void Update()
+    // publicのメソッドは外部のスクリプトからも実行できる
+    // 今回はFPSControllerでItemを拾ってそのアイテムに
+    // アタッチされているItemDetailで設定しているItemTypeを
+    // 引数としてもらう
+    public void UpdateHaveItems(ItemType getItemType)
     {
-        
+        haveItems[(int)getItemType] = true;
     }
 }

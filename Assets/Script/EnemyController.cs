@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
@@ -66,6 +67,19 @@ public class EnemyController : MonoBehaviour
         return false;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Invoke("GameOver", 0.1f);
+        }
+    }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
+
 
     void Update()
     {
@@ -109,7 +123,7 @@ public class EnemyController : MonoBehaviour
             case STATE.CHASE:
 
                 agent.SetDestination(target.transform.position);
-                agent.stoppingDistance = 3;
+                agent.stoppingDistance = 1;
 
                 TurnOffTrigger();
 
