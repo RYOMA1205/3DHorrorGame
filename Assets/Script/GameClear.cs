@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameClear : MonoBehaviour
 {
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     public void OnRestartButtonClicked()
     {
         SceneManager.LoadScene("Main");
