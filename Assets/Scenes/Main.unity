@@ -46951,11 +46951,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1862169009573233033, guid: 84904be0ab3574298bab3fda44899725, type: 3}
       propertyPath: runSpeed
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1862169009573233033, guid: 84904be0ab3574298bab3fda44899725, type: 3}
       propertyPath: walkingSpeed
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1862169009573233035, guid: 84904be0ab3574298bab3fda44899725, type: 3}
       propertyPath: m_Name

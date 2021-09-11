@@ -73,7 +73,7 @@ public class FPSController : MonoBehaviour
             if (!animator.GetBool("Run"))
             {
                 animator.SetBool("Run", true);
-                speed = 0.4f;
+                speed = 0.2f;
             }
         }
         else if (animator.GetBool("Run"))
