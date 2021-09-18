@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameClear : MonoBehaviour
+public class GameStart : MonoBehaviour
 {
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.None;
-    }
-
     public void OnRestartButtonClicked()
     {
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("Main");
     }
 }
