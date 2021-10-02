@@ -29,6 +29,8 @@ public class FPSController : MonoBehaviour
 
     public ItemManager itemManager;
 
+    [SerializeField] private Light handlight;
+
     void Start()
     {
         cameraRot = cam.transform.localRotation;
@@ -80,6 +82,11 @@ public class FPSController : MonoBehaviour
         {
             animator.SetBool("Run", false);
             speed = 0.1f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SwitchHandlight();
         }
     }
 
@@ -168,5 +175,15 @@ public class FPSController : MonoBehaviour
 
             Destroy(itemDetail.gameObject);
         }
+    }
+
+    /// <summary>
+    /// lightの切り替え
+    /// ヒエラルキーにあるLightのチェックをつけたり外したりする
+    /// =!は処理を反対にする
+    /// </summary>
+    private void SwitchHandlight()
+    {
+        handlight.enabled = !handlight.enabled;
     }
 }
