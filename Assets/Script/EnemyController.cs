@@ -91,6 +91,10 @@ public class EnemyController : MonoBehaviour
                 if (CanSeePlayer())
                 {
                     state = STATE.CHASE;
+
+                    // 敵がプレイヤーを発見次第BGMを変更する
+                    // シングルトンクラス付きのスクリプト内のpublicの情報をそのまま使える
+                    SoundManager.instance.PlayBGM(BGMType.ChaseBGM);
                 }
                 else if (Random.Range(0, 500) < 5)
                 {
@@ -134,6 +138,10 @@ public class EnemyController : MonoBehaviour
                 {
                     agent.ResetPath();
                     state = STATE.WANDER;
+
+                    // 見失ったらBGMを戻す
+                    // シングルトンクラス付きのスクリプト内のpublicの情報をそのまま使える
+                    SoundManager.instance.PlayBGM(BGMType.WanderBGM);
                 }
 
                 break;
