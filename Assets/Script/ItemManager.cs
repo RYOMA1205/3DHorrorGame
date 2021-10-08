@@ -12,11 +12,25 @@ public class ItemManager : MonoBehaviour
     public Transform leftBottomTran;
     public Transform rightTopTran;
 
+    // UIにアイテムのアイコンを生成する処理を追加する用
+    [SerializeField]
+    private ItemIconDetail itemIconDetailPrefab;
+
+    [SerializeField]
+    private List<ItemIconDetail> itemIconDetailsList = new List<ItemIconDetail>();
+
+    [SerializeField]
+    private Transform itemIconDetailTran;
+
     void Start()
     {
         // アイテムをランダムな位置に生成
         // ここでメソッドを実行する
         CreateRandomItems();
+
+        // 処理追加
+        // UIにアイテムアイコンの作成
+        CreateItemIconDetails();
     }
 
     public void CreateRandomItems()
@@ -38,8 +52,44 @@ public class ItemManager : MonoBehaviour
     // 今回はFPSControllerでItemを拾ってそのアイテムに
     // アタッチされているItemDetailで設定しているItemTypeを
     // 引数としてもらう
-    public void UpdateHaveItems(ItemType getItemType)
+
+    
+    public void UpdateHaveItems(ItemType getItemType, bool isSwitch = true)  // <= 第２引数を追加
     {
-        haveItems[(int)getItemType] = true;
+        haveItems[(int)getItemType] = isSwitch;                              // <= 代入する値を引数の情報に変更
+
+        // ☆処理を追加
+        if (isSwitch)
+        {
+            Debug.Log("アイテム取得 : " + getItemType.ToString());
+
+            // 獲得したアイテムのアイコンを表示
+            //itemIconDetailsList.Find(x => x.ItemNo == (int)getItemType).TransparentDisplayItemIcon(1.0f);
+
+            // 獲得したアイテムのアイコンの透明度を戻す
+            itemIconDetailsList.Find(Matrix4x4 => Matrix4x4.ItemNo == (int)getItemType).TransparentDisplayItemIcon(1.0f);
+        }
+        else
+        {
+            Debug.Log("アイテム喪失 : " + getItemType.ToString());
+        }
+    }
+
+    // メソッド追加
+
+    private void CreateItemIconDetails()
+    {
+        // アイテム数だけ繰り返す
+        for (int i = 0; i < haveItems.Length; i++)
+        {
+            // アイテムのアイコン作成
+            ItemIconDetail itemIconDetail = Instantiate(itemIconDetailPrefab, itemIconDetailTran, false);
+
+            // アイコンの設定
+            itemIconDetail.SetUpItemIconDetail(i);
+
+            // Listにアイコンを追加
+            itemIconDetailsList.Add(itemIconDetail);
+        }
     }
 }

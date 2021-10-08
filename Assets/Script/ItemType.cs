@@ -3,5 +3,5 @@
 /// </summary>
 public enum ItemType
 {
-    本A, 本B, 本C
+    宝石A, 宝石B, 宝石C
 }
