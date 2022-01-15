@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
     GameObject target;
     public float runSpeed;
 
+
     // 列挙型にコード追加記述
 
     // スタート時に変数にコンポーネントを格納
@@ -31,6 +32,14 @@ public class EnemyController : MonoBehaviour
         if (target == null)
         {
             target = GameObject.FindGameObjectWithTag("Player");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Invoke("GameOver", 0.1f);
         }
     }
 
@@ -48,6 +57,7 @@ public class EnemyController : MonoBehaviour
     // 発見判定関数作成
     bool CanSeePlayer()
     {
+        // 発見判定の前にプレイヤーのライトがついているかを確認
         if (DistanceToPlayer() < 15)
         {
             return true;
@@ -67,13 +77,7 @@ public class EnemyController : MonoBehaviour
         return false;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            Invoke("GameOver", 0.1f);
-        }
-    }
+   
 
     public void GameOver()
     {

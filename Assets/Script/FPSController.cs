@@ -31,10 +31,18 @@ public class FPSController : MonoBehaviour
 
     [SerializeField] private Light handlight;
 
+    // お試し用
+    //private Rigidbody rb;
+
+    //[SerializeField] private float moveSpeed;
+
     void Start()
     {
         cameraRot = cam.transform.localRotation;
         characterRot = transform.localRotation;
+
+        // お試し用
+        //TryGetComponent(out rb);
     }
 
     // アップデートでマウスの入力を受け取り、その動きをカメラに反映
@@ -52,6 +60,10 @@ public class FPSController : MonoBehaviour
 
         cam.transform.localRotation = cameraRot;
         transform.localRotation = characterRot;
+
+        // お試し用
+        //x = Input.GetAxis("Horizontal");
+        //z = Input.GetAxis("Vertical");
 
         // 作成した関数をUPdateで呼び出す
         UpdateCursorLock();
@@ -91,9 +103,13 @@ public class FPSController : MonoBehaviour
     }
 
     // 入力に合わせてプレイヤーの位置を変更していく
-    // カメラの正面方向に進むようにコード記述
+    // カメラの正面方向に進むようにコード記述する
     private void FixedUpdate()
     {
+        //Vector3 velocity = gameObject.transform.rotation * new Vector3(speed, 0, 0);
+
+        //gameObject.transform.position += velocity * Time.deltaTime;
+
         x = 0;
         z = 0;
 
@@ -102,6 +118,21 @@ public class FPSController : MonoBehaviour
 
         //transform.position += new Vector3(x, 0, z);
         transform.position += cam.transform.forward * z + cam.transform.right * x;
+
+        // お試し用
+        //x = Input.GetAxis("Horizontal");
+        //z = Input.GetAxis("Vertical");
+
+        //Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+
+        //Vector3 moveForward = cameraForward * z + Camera.main.transform.right * x;
+
+        //rb.velocity = moveForward * moveSpeed + new Vector3(0, rb.velocity.y, 0);
+
+        //if (moveForward != Vector3.zero)
+        //{
+            //transform.rotation = Quaternion.LookRotation(moveForward);
+        //}
     }
 
     // マウスカーソルの表示を切り替える関数を作成する
@@ -128,7 +159,7 @@ public class FPSController : MonoBehaviour
 
     public Quaternion ClampRotation(Quaternion q)
     {
-        // q = x, y, z, w (x, y, zはベクトル(量と向き) : wはスカラー(座標とは無関係の量))
+        //q = x, y, z, w (x, y, zはベクトル(量と向き) : wはスカラー(座標とは無関係の量))
 
         q.x /= q.w;
         q.y /= q.w;
@@ -140,7 +171,7 @@ public class FPSController : MonoBehaviour
         angleX = Mathf.Clamp(angleX, minX, maxX);
 
         q.x = Mathf.Tan(angleX * Mathf.Deg2Rad * 0.5f);
-
+        
         return q;
     }
 
