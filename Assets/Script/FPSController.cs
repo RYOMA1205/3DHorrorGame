@@ -87,7 +87,7 @@ public class FPSController : MonoBehaviour
             if (!animator.GetBool("Run"))
             {
                 animator.SetBool("Run", true);
-                speed = 0.2f;
+                speed = 0.15f;
             }
         }
         else if (animator.GetBool("Run"))
@@ -104,7 +104,7 @@ public class FPSController : MonoBehaviour
 
     // 入力に合わせてプレイヤーの位置を変更していく
     // カメラの正面方向に進むようにコード記述する
-    private void FixedUpdate()
+    public  void FixedUpdate()
     {
         //Vector3 velocity = gameObject.transform.rotation * new Vector3(speed, 0, 0);
 
@@ -203,6 +203,7 @@ public class FPSController : MonoBehaviour
             // ItemDetailがゲームオブジェクトにアタッチされていた場合
             // アイテムを獲得する処理を実行する
             itemManager.UpdateHaveItems(itemDetail.GetItem());
+            GetComponent<AudioSource>().Play();
 
             Destroy(itemDetail.gameObject);
         }

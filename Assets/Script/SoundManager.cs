@@ -30,7 +30,7 @@ public class SoundManager : MonoBehaviour
             instance = this;
 
             // シーン遷移しても破壊されないゲームオブジェクトを作れる
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
