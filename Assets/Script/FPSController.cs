@@ -104,7 +104,7 @@ public class FPSController : MonoBehaviour
 
     // 入力に合わせてプレイヤーの位置を変更していく
     // カメラの正面方向に進むようにコード記述する
-    public  void FixedUpdate()
+    private void FixedUpdate()
     {
         //Vector3 velocity = gameObject.transform.rotation * new Vector3(speed, 0, 0);
 
