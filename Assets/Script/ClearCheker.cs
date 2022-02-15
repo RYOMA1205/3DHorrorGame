@@ -36,9 +36,10 @@ public class ClearCheker : MonoBehaviour
                 {
                     return;
                 }
-
-                SceneManager.LoadScene("GameClear");
             }
+
+            SceneManager.LoadScene("GameClear");
+
         }
     }
 }
