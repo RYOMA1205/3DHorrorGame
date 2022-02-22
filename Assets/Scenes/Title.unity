@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7D42\u7109"
+  m_Text: D E M I S E
 --- !u!222 &547109461
 CanvasRenderer:
   m_ObjectHideFlags: 0
