@@ -75,8 +75,6 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    // メソッド追加
-
     private void CreateItemIconDetails()
     {
         // アイテム数だけ繰り返す

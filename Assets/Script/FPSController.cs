@@ -31,18 +31,10 @@ public class FPSController : MonoBehaviour
 
     [SerializeField] private Light handlight;
 
-    // お試し用
-    //private Rigidbody rb;
-
-    //[SerializeField] private float moveSpeed;
-
     void Start()
     {
         cameraRot = cam.transform.localRotation;
         characterRot = transform.localRotation;
-
-        // お試し用
-        //TryGetComponent(out rb);
     }
 
     // アップデートでマウスの入力を受け取り、その動きをカメラに反映
@@ -61,7 +53,6 @@ public class FPSController : MonoBehaviour
         cam.transform.localRotation = cameraRot;
         transform.localRotation = characterRot;
 
-        // お試し用
         //x = Input.GetAxis("Horizontal");
         //z = Input.GetAxis("Vertical");
 
@@ -118,21 +109,6 @@ public class FPSController : MonoBehaviour
 
         //transform.position += new Vector3(x, 0, z);
         transform.position += cam.transform.forward * z + cam.transform.right * x;
-
-        // お試し用
-        //x = Input.GetAxis("Horizontal");
-        //z = Input.GetAxis("Vertical");
-
-        //Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-
-        //Vector3 moveForward = cameraForward * z + Camera.main.transform.right * x;
-
-        //rb.velocity = moveForward * moveSpeed + new Vector3(0, rb.velocity.y, 0);
-
-        //if (moveForward != Vector3.zero)
-        //{
-            //transform.rotation = Quaternion.LookRotation(moveForward);
-        //}
     }
 
     // マウスカーソルの表示を切り替える関数を作成する

@@ -10,17 +10,6 @@ public class DoorController : MonoBehaviour
     // ドアの開閉判断用の変数
     public bool isDoorOpen;
 
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     public void OpeningDoor()
     {
         // falseの時はドアが閉じている状態

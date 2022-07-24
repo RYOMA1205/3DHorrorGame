@@ -4,17 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ClearCheker : MonoBehaviour
-{
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
+{ 
     private void OnTriggerEnter(Collider other)
     {
 
